@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 using namespace std;
 struct database
 {
@@ -10,6 +11,8 @@ struct database
     string email;
     string born_date;
     string cot_date;
+    string telefon;
+    string companii;
 } dates[101];
 void insertD()
 {
@@ -23,15 +26,20 @@ void insertD()
     ifstream email("Dates/Email.txt");
     ifstream born_date("Dates/An_nast.txt");
     ifstream cot_date("Dates/An_cot.txt");
+    ifstream telefon("Dates/Telefon.txt");
+    ifstream companii("Dates/Companii.txt");
 
-    for(int i = 0; !name.eof(); i++)
+    for(int i = 1; !name.eof(); i++)
     {
-        getline(name, dates[i].name);
-        getline(pre, dates[i].pre);
-        getline(adress, dates[i].adress);
-        getline(email, dates[i].email);
-        getline(born_date, dates[i].born_date);
-        getline(cot_date, dates[i].cot_date);
+        string namen, pren, adressn, emailn, born_daten, cot_daten, telefonn, companiin;
+        getline(name, namen);                       dates[i].name = "'" + namen + "'";
+        getline(pre, pren);                         dates[i].pre = "'" + pren + "'";
+        getline(adress, adressn);                   dates[i].adress = "'" + adressn + "'";
+        getline(email, emailn);                     dates[i].email = "'" + emailn + "'";
+        getline(born_date, born_daten);             dates[i].born_date = "'" + born_daten + "'";
+        getline(cot_date, cot_daten);               dates[i].cot_date = "'" + cot_daten + "'";
+        getline(telefon, telefonn);                 dates[i].telefon = "'" + telefonn + "'";
+        getline(companii, companiin);               dates[i].companii = "'" + companiin + "'";
     }
 
 
@@ -62,18 +70,98 @@ void insertD()
 
     cout << "\nSe proceseaza datele\n";
     result = "\tINSERT INTO " + table_name + "(";
-    for(int i  = 0 ; i < n ; i++)
+    for(int i  = 1 ; i <= nr_col ; i++)
     {
         result += columns[i];
-        if( i != n - 1)
+        if( i != nr_col)
             result += ", ";
         else
-            result += ")\n";
+            result += "),\n";
     }
     cout << "\nSe introduc datele aleatorii\n";
-    //result
+    result += "\t\tVALUES(";
+    for(int i = 1 ; i <= nr_col ; i++)
+    {
+        switch (type[i])
+        {
+        case 1:
+            result += dates[1].name;
+            break;
+        case 2:
+            result += dates[1].pre;
+            break;
+        case 3:
+            result += dates[1].adress;
+            break;
+        case 4:
+            result += dates[1].telefon;
+            break;
+        case 5:
+            result += dates[1].email;
+            break;
+        case 6:
+            result += dates[1].companii;
+            break;
+        case 7:
+            result += dates[1].born_date;
+            break;
+        case 8:
+            result += dates[1].cot_date;
+            break;
+        case 9:
+            result += "''";
+            break;
+        }
+        if( i < nr_col)
+            result += ", ";
+        else
+            result += "),\n";
+    }
 
+    for(int g = 2; g <= 100; g++)
+    {
+        result += "\t\t\t(";
+        for(int i = 1; i <= nr_col; i++)
+        {
+            switch (type[i])
+            {
+            case 1:
+                result += dates[g].name;
+                break;
+            case 2:
+                result += dates[g].pre;
+                break;
+            case 3:
+                result += dates[g].adress;
+                break;
+            case 4:
+                result += dates[g].telefon;
+                break;
+            case 5:
+                result += dates[g].email;
+                break;
+            case 6:
+                result += dates[g].companii;
+                break;
+            case 7:
+                result += dates[g].born_date;
+                break;
+            case 8:
+                result += dates[g].cot_date;
+                break;
+            case 9:
+                result += "''";
+                break;
+            }
+            if( i < nr_col)
+                result += ", ";
+            else
+                result += "),\n";
+        }
 
+    }
 
-
+    cout << "\n\n" << result;
 }
+#warning \note (Vlad#9#): Shuffle arrays from file\
+Add ID count, arrays from file, or other
