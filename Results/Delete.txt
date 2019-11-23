@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 USE MASTER
 GO
 DROP DATABASE testDel
+=======
+USE MASTER
+GO
+DROP DATABASE testDel
+>>>>>>> b572930bc42bafed79b25ce941427dc7c21934f0

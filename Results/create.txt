@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --CREAREA BAZEI DE DATE
 USE master
 GO
@@ -12,4 +13,20 @@ GO
 CREATE DATABASE test
 GO
 USE test
+=======
+--CREAREA BAZEI DE DATE
+USE master
+GO
+IF exists(
+	SELECT *FROM sys.databases WHERE name='test')
+BEGIN
+		ALTER DATABASE test SET single_user
+		WITH ROLLBACK IMMEDIATE
+		DROP DATABASE test
+		END
+GO
+CREATE DATABASE test
+GO
+USE test
+>>>>>>> b572930bc42bafed79b25ce941427dc7c21934f0
 GO
