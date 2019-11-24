@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+//#include "log.h"
 using namespace std;
 deleteD(){
 
@@ -18,4 +19,6 @@ deleteD(){
     c << result;
     cout << "Fisierul selete.sql se afla la locatia: ./Results/ \n";
 
+    logs("Deleted Database " + str);
 }
+

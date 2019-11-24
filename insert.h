@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
+//#include "log.h"
 using namespace std;
 struct database
 {
@@ -13,6 +14,7 @@ struct database
     string cot_date;
     string telefon;
     string companii;
+    string id;
 } dates[101];
 void insertD()
 {
@@ -28,20 +30,29 @@ void insertD()
     ifstream cot_date("Dates/An_cot.txt");
     ifstream telefon("Dates/Telefon.txt");
     ifstream companii("Dates/Companii.txt");
-
+    ifstream id("Dates/ID.txt");
+    ofstream c("Results/insert.txt");
     for(int i = 1; !name.eof(); i++)
     {
         string namen, pren, adressn, emailn, born_daten, cot_daten, telefonn, companiin;
-        getline(name, namen);                       dates[i].name = "'" + namen + "'";
-        getline(pre, pren);                         dates[i].pre = "'" + pren + "'";
-        getline(adress, adressn);                   dates[i].adress = "'" + adressn + "'";
-        getline(email, emailn);                     dates[i].email = "'" + emailn + "'";
-        getline(born_date, born_daten);             dates[i].born_date = "'" + born_daten + "'";
-        getline(cot_date, cot_daten);               dates[i].cot_date = "'" + cot_daten + "'";
-        getline(telefon, telefonn);                 dates[i].telefon = "'" + telefonn + "'";
-        getline(companii, companiin);               dates[i].companii = "'" + companiin + "'";
+        getline(name, namen);
+        dates[i].name = "'" + namen + "'";
+        getline(pre, pren);
+        dates[i].pre = "'" + pren + "'";
+        getline(adress, adressn);
+        dates[i].adress = "'" + adressn + "'";
+        getline(email, emailn);
+        dates[i].email = "'" + emailn + "'";
+        getline(born_date, born_daten);
+        dates[i].born_date = "'" + born_daten + "'";
+        getline(cot_date, cot_daten);
+        dates[i].cot_date = "'" + cot_daten + "'";
+        getline(telefon, telefonn);
+        dates[i].telefon = "'" + telefonn + "'";
+        getline(companii, companiin);
+        dates[i].companii = "'" + companiin + "'";
+        getline(id, dates[i].id);
     }
-
 
     cout << "Introduceti numele tabelului: ";
     cin >> table_name;
@@ -60,7 +71,7 @@ void insertD()
     cout << "1. Nume         2. Prenume         3. Adresa\n";
     cout << "4. Telefon      5. Email           6. Companii\n";
     cout << "7. An 90-07     8. An 07-19\n      9. NULL\n";
-    cout << "10. ID\n";
+    cout << "10. ID\n\n";
 
     for(int i = 1; i <= nr_col; i++)
     {
@@ -68,6 +79,7 @@ void insertD()
         cin >> type[i];
     }
 
+    //INSERT INTO( COLUMNS)
     cout << "\nSe proceseaza datele\n";
     result = "\tINSERT INTO " + table_name + "(";
     for(int i  = 1 ; i <= nr_col ; i++)
@@ -78,6 +90,7 @@ void insertD()
         else
             result += "),\n";
     }
+    //VALUES (VALUES),
     cout << "\nSe introduc datele aleatorii\n";
     result += "\t\tVALUES(";
     for(int i = 1 ; i <= nr_col ; i++)
@@ -111,13 +124,17 @@ void insertD()
         case 9:
             result += "''";
             break;
+        case 10:
+            result += dates[1].id;
+            break;
         }
         if( i < nr_col)
             result += ", ";
         else
             result += "),\n";
     }
-
+    //(VALUES),
+    //........,
     for(int g = 2; g <= 100; g++)
     {
         result += "\t\t\t(";
@@ -152,16 +169,34 @@ void insertD()
             case 9:
                 result += "''";
                 break;
+            case 10:
+                result += dates[g].id;
+                break;
             }
             if( i < nr_col)
                 result += ", ";
+            else if(g >= 100)
+                result += ")";
             else
                 result += "),\n";
         }
 
     }
 
+    c << result;
     cout << "\n\n" << result;
+    logs("Inserted data in " + nr_col + 'in Database ' + str);
 }
-#warning \note (Vlad#9#): Shuffle arrays from file\
-Add ID count, arrays from file, or other
+
+
+/*
+LOGS:
+'Date' 'Action'
+*After:
+*Date Action User
+*/
+#warning TODO (Vlad#6#): Login with username
+#warning TODO (Vlad#7#): Add logs
+#warning TODO (Vlad#9#): Add n tables
+#warning \note (Vlad#5#): Add posibily to return code with n rows
+#warning @todo (Vlad#2#): Separate code in modules (functions)

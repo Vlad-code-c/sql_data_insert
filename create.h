@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+//#include "log.h"
 using namespace std;
 void createD()
 {
@@ -15,18 +16,20 @@ void createD()
              "\nUSE master"
              "\nGO"
              "\nIF exists("
-             	"\n\tSELECT *FROM sys.databases WHERE name='" + str + "')"
+             "\n\tSELECT *FROM sys.databases WHERE name='" + str + "')"
              "\nBEGIN"
-             		"\n\t\tALTER DATABASE " + str + " SET single_user"
-             		"\n\t\tWITH ROLLBACK IMMEDIATE"
-             		"\n\t\tDROP DATABASE " + str +
-             		"\n\t\tEND"
+             "\n\t\tALTER DATABASE " + str + " SET single_user"
+             "\n\t\tWITH ROLLBACK IMMEDIATE"
+             "\n\t\tDROP DATABASE " + str +
+             "\n\t\tEND"
              "\nGO"
              "\nCREATE DATABASE " + str +
              "\nGO"
              "\nUSE " + str +
-                 "\nGO";
+             "\nGO";
 
     c << result;
-        cout << "Fisierul Create.sql se afla la locatia: ./Results/ \n";
+    cout << "Fisierul Create.sql se afla la locatia: ./Results/ \n";
+    logs("Created Database " + str);
 }
+
