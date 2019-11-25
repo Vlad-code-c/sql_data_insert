@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-//#include "log.h"
 using namespace std;
+void logs(string);
 void createD()
 {
     ofstream c("Results/Create.txt");

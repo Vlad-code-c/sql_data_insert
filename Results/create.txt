@@ -2,14 +2,14 @@
 USE master
 GO
 IF exists(
-	SELECT *FROM sys.databases WHERE name='rfg')
+	SELECT *FROM sys.databases WHERE name='Test7')
 BEGIN
-		ALTER DATABASE rfg SET single_user
+		ALTER DATABASE Test7 SET single_user
 		WITH ROLLBACK IMMEDIATE
-		DROP DATABASE rfg
+		DROP DATABASE Test7
 		END
 GO
-CREATE DATABASE rfg
+CREATE DATABASE Test7
 GO
-USE rfg
+USE Test7
 GO

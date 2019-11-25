@@ -2,8 +2,8 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
-//#include "log.h"
 using namespace std;
+void logs(string);
 struct database
 {
     string name;
@@ -185,8 +185,9 @@ void insertD()
 
     c << result;
     cout << "\n\n" << result;
-    logs("Inserted data in " + nr_col + 'in Database ' + str);
+    logs("Inserted data in Database table " + table_name);
 }
+
 
 
 /*
@@ -195,8 +196,7 @@ LOGS:
 *After:
 *Date Action User
 */
-#warning TODO (Vlad#6#): Login with username
-#warning TODO (Vlad#7#): Add logs
+
 #warning TODO (Vlad#9#): Add n tables
-#warning \note (Vlad#5#): Add posibily to return code with n rows
 #warning @todo (Vlad#2#): Separate code in modules (functions)
+#warning TODO (Vlad#6#): Login with username
