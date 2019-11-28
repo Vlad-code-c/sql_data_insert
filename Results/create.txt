@@ -2,14 +2,14 @@
 USE master
 GO
 IF exists(
-	SELECT *FROM sys.databases WHERE name='Test7')
+	SELECT *FROM sys.databases WHERE name='Companie_Asigurari')
 BEGIN
-		ALTER DATABASE Test7 SET single_user
+		ALTER DATABASE Companie_Asigurari SET single_user
 		WITH ROLLBACK IMMEDIATE
-		DROP DATABASE Test7
+		DROP DATABASE Companie_Asigurari
 		END
 GO
-CREATE DATABASE Test7
+CREATE DATABASE Companie_Asigurari
 GO
-USE Test7
+USE Companie_Asigurari
 GO

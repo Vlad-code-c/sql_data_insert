@@ -84,7 +84,7 @@ void insertD()
         cout << "Tipuri disponibile: \n";
         cout << "1. Nume         2. Prenume         3. Adresa\n";
         cout << "4. Telefon      5. Email           6. Companii\n";
-        cout << "7. An 90-07     8. An 07-19\n      9. NULL\n";
+        cout << "7. An 90-07     8. An 07-19        9. NULL\n";
         cout << "10. ID\n\n";
 
         for(int i = 1; i <= nr_col; i++)
@@ -195,16 +195,19 @@ void insertD()
 
         }
         system("cls");
-        result += "\n";
+        result += "\nGO\n";
     }
 
     c << result;
     cout << "\n\n" << result;
-    cout << "\n\nDatele au fost adaugate cu succes in fisier";
+    cout << "\n\nDatele au fost adaugate cu succes in fisier\n";
+
+
+
 
 
     //LOGS:
-    fstream data_log("Dates/log_id.txt", ios_base::out | ios_base::in);
+    {fstream data_log("Dates/log_id.txt", ios_base::out | ios_base::in);
     string dat;
     data_log >> dat;
 
@@ -214,10 +217,10 @@ void insertD()
     idd++;
     file_write(idd);
 
-
-    cout << "Data_log_str:" << dat << "!";
     logs("Inserted dates with id " + dat);
+    }
 }
-
-#warning @todo (Vlad#2#): Separate code in modules (functions)
-#warning TODO (Vlad#6#): Login with username
+#warning @todo (Vlad#1#): Modific filestream system, to eliminate data redundancy
+#warning @todo (Vlad#1#): Add referenced key
+#warning @todo (Vlad#1#): If column name == type name, then dont ask for type
+#warning #Feature (Vlad#1#): Verify if column name (introduced by user) exist in /data/....txt
